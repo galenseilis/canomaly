@@ -1,11 +1,14 @@
-'''
+"""
 Search for cumulative changes in data.
-'''
+"""
 
 from tdda import rexpy
 import pandas as pd
 
-def _frozenset_target_by_group(df: pd.DataFrame, target: str, group: str) -> pd.DataFrame:
+
+def _frozenset_target_by_group(
+    df: pd.DataFrame, target: str, group: str
+) -> pd.DataFrame:
     """
     Groups the values of the target column in df by the corresponding values of
     the group column and returns a new dataframe with a column containing
@@ -28,9 +31,11 @@ def _frozenset_target_by_group(df: pd.DataFrame, target: str, group: str) -> pd.
         column.
     """
     # Group target values by corresponding values of group
-    grouped = df.groupby(group)[target]\
-              .apply(lambda x: frozenset(x))\
-              .reset_index(name=target + '_grouped')
+    grouped = (
+        df.groupby(group)[target]
+        .apply(lambda x: frozenset(x))
+        .reset_index(name=target + "_grouped")
+    )
     return grouped
 
 
@@ -57,11 +62,9 @@ def cumrexpy(df: pd.DataFrame, target: str, group: str) -> pd.Series:
     """
     df_frozen = _frozenset_target_by_group(df, target, group)
     df_frozen = df_frozen.set_index(group)
-    result = df_frozen[f'{target}_grouped']\
-             .apply(list)\
-             .cumsum()\
-             .apply(rexpy.extract)
+    result = df_frozen[f"{target}_grouped"].apply(list).cumsum().apply(rexpy.extract)
     return result
+
 
 def df_seq_diff(df: pd.DataFrame) -> pd.DataFrame:
     """
