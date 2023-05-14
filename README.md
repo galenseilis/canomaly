@@ -94,7 +94,10 @@ We can look at the results in markdown for clarity.
 | 2018-11-23 00:00:00 | ['^frank@mydomain\\.com$', '^[a-z]{4,5}[.@][a-z]+[.@][a-z]+\\.[a-z]{2,3}$', '^bob\\-johnson_123@example\\.com$'] |
 | 2018-11-24 00:00:00 | ['^frank@mydomain\\.com$', '^[a-z]+[.@_][a-z]+[.@][a-z]+\\.[a-z]{2,3}$', '^bob\\-johnson_123@example\\.com$']    |
 
-## Build Documentation Locally
+## Documentation
+
+The documentation is available https://canomaly.readthedocs.io/en/latest/index.html, or you can build is locally using the following:
+
 ```bash
 cd /path/to/canomaly/docs
 make html
