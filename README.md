@@ -96,7 +96,7 @@ We can look at the results in markdown for clarity.
 
 ## Documentation
 
-The documentation is available https://canomaly.readthedocs.io/en/latest/index.html, or you can build is locally using the following:
+The documentation is available https://canomaly.readthedocs.io/en/latest/index.html, or you can build it locally using the following:
 
 ```bash
 cd /path/to/canomaly/docs
