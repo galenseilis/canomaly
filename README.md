@@ -18,7 +18,7 @@
 		<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/canaomly">
 	</a>
 	<a href="https://github.com/galenseilis/canomaly/blob/main/LICENSE" target="_blank">
-		<img alt="License" src="https://img.shields.io/badge/License-BSD_3--Clause-blue.svg">
+		<img alt="License" src="https://img.shields.io/badge/License-GNU--GPL-blue.svg">
 	</a>
 	<a href="https://github.com/psf/black" target="_blank">
 		<img alt="Code style: Black" src="https://img.shields.io/badge/code%20style-black-000000.svg">
