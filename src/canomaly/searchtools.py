@@ -59,6 +59,24 @@ def cumrexpy(df: pd.DataFrame, target: str, group: str) -> pd.Series:
         A new series containing the cumulative extraction of regular
         expressions applied to the values of the target column grouped by the
         corresponding values of the group column.
+
+    References
+    ----------
+    .. "Introducing Rexpy: Automatic Discovery of Regular Expressions", http://www.tdda.info/introducing-rexpy-automatic-discovery-of-regular-expressions
+
+
+    Examples
+    --------
+    >>> import pandas as pd
+    >>> from canomaly.searchtools import cumrexpy
+    >>> data = {'target': ['apple', 'apple', 'banana', 'banana', 'orange'],
+                'group': ['a', 'a', 'b', 'b', 'b']}
+    >>> df = pd.DataFrame(data)
+    >>> cumrexpy(df, 'target', 'group')
+    group
+    a         [^apple$]
+    b    [^[a-z]{5,6}$]
+    Name: target_grouped, dtype: object
     """
     df_frozen = _frozenset_target_by_group(df, target, group)
     df_frozen = df_frozen.set_index(group)
