@@ -75,6 +75,16 @@ date
 Name: email_grouped, dtype: object
 ```
 
+We can look at the results in markdown for clarity.
+
+| date                | email_grouped                                                                                                    |
+|:--------------------|:-----------------------------------------------------------------------------------------------------------------|
+| 2018-11-20 00:00:00 | ['^john\\.doe@example\\.com$']                                                                                   |
+| 2018-11-21 00:00:00 | ['^[a-z]{4}\\.[a-z]{3,5}@example\\.com$']                                                                        |
+| 2018-11-22 00:00:00 | ['^[a-z]{4,5}[.@][a-z]+[.@][a-z]+\\.[a-z]{2,3}$', '^bob\\-johnson_123@example\\.com$']                           |
+| 2018-11-23 00:00:00 | ['^frank@mydomain\\.com$', '^[a-z]{4,5}[.@][a-z]+[.@][a-z]+\\.[a-z]{2,3}$', '^bob\\-johnson_123@example\\.com$'] |
+| 2018-11-24 00:00:00 | ['^frank@mydomain\\.com$', '^[a-z]+[.@_][a-z]+[.@][a-z]+\\.[a-z]{2,3}$', '^bob\\-johnson_123@example\\.com$']    |
+
 ## Build Documentation Locally
 ```bash
 cd /path/to/canomaly/docs
