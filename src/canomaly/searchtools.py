@@ -33,7 +33,7 @@ def _frozenset_target_by_group(
     # Group target values by corresponding values of group
     grouped = (
         df.groupby(group)[target]
-        .apply(lambda x: frozenset(x))
+        .apply(frozenset)
         .reset_index(name=target + "_grouped")
     )
     return grouped
