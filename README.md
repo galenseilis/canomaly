@@ -41,7 +41,31 @@ pip3 install canomaly
 
 ## Example Usage
 
-Coming soon.
+```python
+>>> import pandas as pd
+>>> from canomaly.searchtools import cumrexpy
+>>> # Get some data
+>>> data = {
+            'date': [
+                '2018-11-20',
+                '2018-11-21',
+                '2018-11-22',
+                '2018-11-22',
+                '2018-11-23',
+                '2018-11-24'],
+                'email': [
+                    'john.doe@example.com',
+                    'jane.smith@example.com',
+                    'bob-johnson_123@example.com',
+                    'sarah@mydomain.co.uk',
+                    'frank@mydomain.com',
+                    'jessica_lee@mydomain.com'
+                    ]
+            }
+        df = pd.DataFrame(data)
+        df['date'] = pd.to_datetime(df['date'])
+>>> cumrexpy(df, 'email', 'date')
+```
 
 ## Build Documentation Locally
 ```bash
