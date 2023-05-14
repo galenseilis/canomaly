@@ -53,18 +53,26 @@ pip3 install canomaly
                 '2018-11-22',
                 '2018-11-23',
                 '2018-11-24'],
-                'email': [
-                    'john.doe@example.com',
-                    'jane.smith@example.com',
-                    'bob-johnson_123@example.com',
-                    'sarah@mydomain.co.uk',
-                    'frank@mydomain.com',
-                    'jessica_lee@mydomain.com'
+            'email': [
+                'john.doe@example.com',
+                'jane.smith@example.com',
+                'bob-johnson_123@example.com',
+                'sarah@mydomain.co.uk',
+                'frank@mydomain.com',
+                'jessica_lee@mydomain.com'
                     ]
             }
-        df = pd.DataFrame(data)
-        df['date'] = pd.to_datetime(df['date'])
->>> cumrexpy(df, 'email', 'date')
+>>> df = pd.DataFrame(data)
+>>> df['date'] = pd.to_datetime(df['date'])
+>>> result = cumrexpy(df, 'email', 'date')
+>>> result
+date
+2018-11-20                           [^john\.doe@example\.com$]
+2018-11-21                [^[a-z]{4}\.[a-z]{3,5}@example\.com$]
+2018-11-22    [^[a-z]{4,5}[.@][a-z]+[.@][a-z]+\.[a-z]{2,3}$,...
+2018-11-23    [^frank@mydomain\.com$, ^[a-z]{4,5}[.@][a-z]+[...
+2018-11-24    [^frank@mydomain\.com$, ^[a-z]+[.@_][a-z]+[.@]...
+Name: email_grouped, dtype: object
 ```
 
 ## Build Documentation Locally
