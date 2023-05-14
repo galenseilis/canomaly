@@ -1,51 +1,81 @@
 '''
-Search for cumulative changes 
+Search for cumulative changes in data.
 '''
 
+from tdda import rexpy
 import pandas as pd
 
-def cummax():
-    ...
-
-def cummin():
-    ...
-
-def cum_abs_min():
-    ...
-
-def cum_abs_max():
-    ...
-
-# TODO: Handle repeat dates
-# TODO: Support arbitrary aggregation function
-
-def doubly_aggregate(df, agg_f, column, group):
+def _frozenset_target_by_group(df, target, group):
     """
-    Applies a double aggregation to a column in a dataframe based on a grouping variable.
+    Groups the values of the target column in df by the corresponding values of
+    the group column and returns a new dataframe with a column containing
+    frozensets of the grouped values.
 
     Parameters:
     -----------
     df : pandas.DataFrame
-        A pandas DataFrame with columns matching the arguments `column` and `group`.
-    agg_f : function
-        An aggregation function to be applied to the `column` within each group.
-    column : str
-        The name of the column to be aggregated.
+        A pandas DataFrame with columns target and group.
+    target : str
+        The name of the column to group the values of.
     group : str
-        The name of the grouping variable.
+        The name of the column to group the values by.
 
     Returns:
     --------
     pandas.DataFrame
-        A DataFrame containing the doubly-aggregated column paired with the group.
+        A new dataframe with a column containing frozensets of the values of
+        the target column grouped by the corresponding values of the group
+        column.
     """
-    # First aggregation
-    agg_column = df.groupby(group)[column].agg(agg_f)
-    # Sort by group
-    agg_column_sorted = agg_column.sort_index()
-    # Apply the aggregation function again cumulatively
-    doubly_agg_column = pd.Series(index=agg_column_sorted.index, dtype=df.column.dtype)
-    for i, (group_name, group_value) in enumerate(agg_column_sorted.items()):
-        doubly_agg_column[group_name] = agg_f(agg_column_sorted.iloc[:i+1])
-    return doubly_agg_column
+    # Group target values by corresponding values of group
+    grouped = df.groupby(group)[target]\
+              .apply(lambda x: frozenset(x))\
+              .reset_index(name=target + '_grouped')
+    return grouped
 
+
+def cumrexpy(df, target, group):
+    """
+    Applies a cumulative extraction of regular expressions to the grouped values
+    of the target column in a pandas dataframe.
+
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        A pandas DataFrame with columns target and group.
+    target : str
+        The name of the column to group the values of.
+    group : str
+        The name of the column to group the values by.
+
+    Returns:
+    --------
+    pandas.Series
+        A new series containing the cumulative extraction of regular
+        expressions applied to the values of the target column grouped by the
+        corresponding values of the group column.
+    """
+    df_frozen = _frozenset_target_by_group(df, target, group)
+    df_frozen = df_frozen.set_index(group)
+    result = df_frozen[f'{target}_grouped']\
+             .apply(list)\
+             .cumsum()\
+             .apply(rexpy.extract)
+    return result
+
+def df_seq_diff(df):
+    """
+    Returns a dataframe with rows that have at least one changed value compared to the previous row.
+
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        A pandas DataFrame with columns to compare for changes.
+
+    Returns:
+    --------
+    pandas.DataFrame
+        A new dataframe containing the rows of the original dataframe that have at least
+        one changed value compared to the previous row.
+    """
+    return df[df != df.shift()]
