@@ -64,8 +64,8 @@ pip3 install canomaly
             }
 >>> df = pd.DataFrame(data)
 >>> df['date'] = pd.to_datetime(df['date'])
->>> result = cumrexpy(df, 'email', 'date')
->>> result
+>>> # Extract regular expressions
+>>> cumrexpy(df, 'email', 'date')
 date
 2018-11-20                           [^john\.doe@example\.com$]
 2018-11-21                [^[a-z]{4}\.[a-z]{3,5}@example\.com$]
