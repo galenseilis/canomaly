@@ -10,7 +10,7 @@ def _frozenset_target_by_group(
     df: pd.DataFrame, target: str, group: str
 ) -> pd.DataFrame:
     """
-    Groups the values of the target column in df by the corresponding values of
+    Group the values of the target column in df by the corresponding values of
     the group column and returns a new dataframe with a column containing
     frozensets of the grouped values.
 
@@ -41,7 +41,7 @@ def _frozenset_target_by_group(
 
 def cumrexpy(df: pd.DataFrame, target: str, group: str) -> pd.Series:
     """
-    Applies a cumulative extraction of regular expressions to the grouped values
+    Apply a cumulative extraction of regular expressions to the grouped values
     of the target column in a pandas dataframe.
 
     Parameters:
@@ -68,7 +68,7 @@ def cumrexpy(df: pd.DataFrame, target: str, group: str) -> pd.Series:
 
 def df_seq_diff(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Returns a dataframe with rows that have at least one changed value compared to the previous row.
+    Return a dataframe with rows that have at least one changed value compared to the previous row.
 
     Parameters:
     -----------
