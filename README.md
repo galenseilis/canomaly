@@ -100,6 +100,6 @@ cd /path/to/canomaly/docs
 make html
 ```
 
-
+## Star History
 ![Star History Chart](https://api.star-history.com/svg?repos=galenseilis/canomaly&type=Date)
 
