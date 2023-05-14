@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 
-from canomaly.search import cumrexpy, _frozenset_target_by_group
+from canomaly.searchtools import cumrexpy, _frozenset_target_by_group
 
 class TestFunctions(unittest.TestCase):
     

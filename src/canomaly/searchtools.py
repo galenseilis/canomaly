@@ -5,7 +5,7 @@ Search for cumulative changes in data.
 from tdda import rexpy
 import pandas as pd
 
-def _frozenset_target_by_group(df, target, group):
+def _frozenset_target_by_group(df: pd.DataFrame, target: str, group: str) -> pd.DataFrame:
     """
     Groups the values of the target column in df by the corresponding values of
     the group column and returns a new dataframe with a column containing
@@ -34,7 +34,7 @@ def _frozenset_target_by_group(df, target, group):
     return grouped
 
 
-def cumrexpy(df, target, group):
+def cumrexpy(df: pd.DataFrame, target: str, group: str) -> pd.Series:
     """
     Applies a cumulative extraction of regular expressions to the grouped values
     of the target column in a pandas dataframe.
@@ -63,7 +63,7 @@ def cumrexpy(df, target, group):
              .apply(rexpy.extract)
     return result
 
-def df_seq_diff(df):
+def df_seq_diff(df: pd.DataFrame) -> pd.DataFrame:
     """
     Returns a dataframe with rows that have at least one changed value compared to the previous row.
 
